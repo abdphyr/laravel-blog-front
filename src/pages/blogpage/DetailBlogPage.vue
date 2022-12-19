@@ -35,24 +35,22 @@
                   <span class="text-primary px-2">|</span> -->
                   <a class="text-secondary text-uppercase font-weight-medium" href="">{{ postSt.value?.created_at }}</a>
                 </div>
-                <div class="d-flex justify-content-between mb-4 mb-sm-0">
-                  <router-link @click="handleUpdate" to="/confirm-password"
-                    v-if="user && postSt.value && (postSt.value.user_id === user.id)"
+                <div v-if="access() || isAdmin()" class="d-flex justify-content-between mb-4 mb-sm-0">
+                  <router-link @click="handleUpdate"
+                    :to="isAdmin() ? `/blog/update/${postSt.value?.id}` : '/confirm-password'"
                     class="btn btn-sm btn-warning mr-2">
                     Update
                   </router-link>
-                  <router-link @click="handleDelete" to="/confirm-password"
-                    v-if="user && postSt.value && (postSt.value.user_id === user.id)" class="btn btn-sm btn-danger">
+                  <router-link @click="handleDelete"
+                    :to="isAdmin() ? `/blog/delete/${postSt.value?.id}` : '/confirm-password'"
+                    class="btn btn-sm btn-danger mr-2">
                     Delete
                   </router-link>
                 </div>
               </div>
-              <div class="mb-2">
-                <h1 v-if="postSt.value?.title"
-                  v-for="l in ((postSt.value.title.length - postSt.value.title.length % 15) / 15)">
-                  {{ postSt.value.title.slice((l - 1) * 15, 15 * l) }}
-                </h1>
-              </div>
+              <h1 class="mb-5">
+                {{ postSt.value?.title }}
+              </h1>
               <h4 class="mt-5 text-danger text-center p-2 bg-warning d-inline border-2 rounded">
                 {{ postSt.value?.category.name }}
               </h4>
@@ -78,8 +76,8 @@
                   <h6>
                     {{ comment.user.username }} <small><i>{{ comment.created_at }}</i></small>
                   </h6>
-                  <p style="width: 250px;">
-                  <div class="" style="overflow: auto;">
+                  <p>
+                  <div class="" >
                     {{ comment.body }}
                   </div>
                   </p>
@@ -90,21 +88,6 @@
             <div v-if="user" class="bg-light rounded p-3 p-sm-5">
               <h3 class="mb-4 section-title">Leave a comment</h3>
               <form @submit.prevent="handleSubmitCommit">
-                <!-- <div class="form-row">
-                  <div class="form-group col-sm-6">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name" />
-                  </div>
-                  <div class="form-group col-sm-6">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="website">Website</label>
-                  <input type="url" class="form-control" id="website" />
-                </div> -->
-
                 <div class="form-group">
                   <label for="message">Message *</label>
                   <textarea v-model="commitBody" id="message" cols="30" rows="5" class="form-control"></textarea>
@@ -115,18 +98,8 @@
               </form>
             </div>
           </div>
-
           <div class="col-lg-4 mt-5 mt-lg-0">
-            <div class="
-              d-flex
-              flex-column
-              text-center
-              bg-secondary
-              rounded
-              mb-5
-              py-5
-              px-4
-            ">
+            <div class=" d-flex flex-column text-center bg-secondary rounded mb-5 py-5 px-4">
               <img v-if="postSt.value?.user.avatar" :src="postSt.value?.user.avatar"
                 class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px" />
               <img v-if="!postSt.value?.user.avatar" src="../../img/user1.webp"
@@ -257,17 +230,33 @@ const handleSubmitCommit = () => {
       alert(err.message)
     })
 }
+const isAdmin = () => {
+  if (user.value) {
+    return user.value.roles.some(item => item.role_name === "admin")
+  }
+  return false;
+}
+
+const access = () => {
+  if (user.value && postSt.value.value) {
+    return postSt.value.value.user_id === user.value.id;
+  }
+  return false;
+}
 
 const handleUpdate = () => {
-  store.commit(authMutationCons.CONFIRM_PASSWORD,
-    `/blog/update/${postSt.value.value?.id}`)
+  if (!isAdmin()) {
+    store.commit(authMutationCons.CONFIRM_PASSWORD,
+      `/blog/update/${postSt.value.value?.id}`)
+  }
 }
 
 const handleDelete = () => {
-  store.commit(authMutationCons.CONFIRM_PASSWORD,
-    `/blog/delete/${postSt.value.value?.id}`)
+  if (!isAdmin()) {
+    store.commit(authMutationCons.CONFIRM_PASSWORD,
+      `/blog/delete/${postSt.value.value?.id}`)
+  }
 }
-
 
 onMounted(() => {
   store.dispatch(postActionsCons.GET_POST, id);

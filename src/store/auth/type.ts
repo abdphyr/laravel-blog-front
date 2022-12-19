@@ -8,6 +8,10 @@ export interface IUser {
   updated_at: string;
   avatar: string | null;
   info: string | null;
+  roles: {
+    id: number;
+    role_name: "admin" | "editor" | "blogger"
+  }[]
 }
 
 export interface IAuth {

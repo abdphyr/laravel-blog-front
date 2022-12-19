@@ -40,7 +40,7 @@ const error = ref<string>();
 
 const handleConfirm = () => {
   ax.post('/confirm-password', { password: password.value })
-    .then(res => {
+    .then(res => {2
       link.navigate();
     })
     .catch(err => {

@@ -20,9 +20,9 @@
             <p class="help-block text-danger"><span v-if="request.validate.title">Sarlavha kiritish majburiy</span></p>
           </div>
 
-          <div v-if="isCreate" class="control-group">
-            <select v-model="category_id" class="form-select">
-              <option v-for="{ name, id } in categories.value" class="" :value="id" :key="id">
+          <div v-if="isCreate" class="">
+            <select v-model="category_id" class="form-control">
+              <option class="form-option" v-for="{ name, id } in categories.value" :value="id" :key="id">
                 {{ name }}
               </option>
             </select>
@@ -30,7 +30,7 @@
           </div>
 
           <div v-if="isCreate" class="control-group">
-            <select v-model="post_tags" class="form-select" multiple>
+            <select v-model="post_tags" class="form-control" multiple>
               <option v-for="{ tag_name, id } in tags.value" class="" :value="id" :key="id">
                 {{ tag_name }}
               </option>
