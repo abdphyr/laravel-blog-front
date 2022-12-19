@@ -3,19 +3,23 @@ import { IPostState } from "./type"
 export const postState: IPostState = {
   posts: {
     value: {
-      current_page: 0,
       data: [],
-      first_page_url: '',
-      from: 0,
-      last_page: 0,
-      last_page_url: '',
-      links: [],
-      next_page_url: '',
-      path: '',
-      per_page: 0,
-      prev_page_url: '',
-      to: 0,
-      total: 0
+      links: {
+        first: null,
+        last: null,
+        prev: null,
+        next: null,
+      },
+      meta: {
+        current_page: 0,
+        from: 0,
+        last_page: 0,
+        links: [],
+        path: '',
+        per_page: 0,
+        to: 0,
+        total: 0
+      }
     },
     error: null,
     load: true

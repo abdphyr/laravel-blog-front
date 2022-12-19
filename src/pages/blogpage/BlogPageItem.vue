@@ -15,7 +15,7 @@
         <a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a>
       </div>
       <div class="rounded-1 p-1 bg-success text-white">
-        {{ post.category?.name }}
+        {{ post.category_name }}
       </div>
     </div>
     <h5 class="font-weight-medium mb-2">{{ post.title }}</h5>

@@ -43,19 +43,19 @@
           <div class="col-12">
             <nav aria-label="Page navigation">
               <ul class="pagination pagination-lg justify-content-center mb-0">
-                <li :class="`page-item ${postsSt.value.current_page === 1 ? 'disabled' : ''}`">
+                <li :class="`page-item ${postsSt.value.meta.current_page === 1 ? 'disabled' : ''}`">
                   <a @click="getData(page - 1)" class="page-link" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                 </li>
                 <ul class="pagination pagination-lg justify-content-center mb-0">
-                  <li v-for="pg in postsSt.value.last_page" :key="pg" @click="getData(pg)"
+                  <li v-for="pg in postsSt.value.meta.last_page" :key="pg" @click="getData(pg)"
                     :class="`page-item ${pg === page ? 'active' : ''}`">
                     <a class="page-link">{{ pg }}</a>
                   </li>
                 </ul>
-                <li :class="`page-item ${postsSt.value.current_page === postsSt.value.last_page ? 'disabled' : ''}`">
+                <li :class="`page-item ${postsSt.value.meta.current_page === postsSt.value.meta.last_page ? 'disabled' : ''}`">
                   <a @click="getData(page + 1)" class="page-link" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>

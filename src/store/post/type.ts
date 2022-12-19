@@ -1,21 +1,23 @@
 import { ICategory } from "../category";
 import { IUser } from "../auth";
 import { ITag } from "../tag";
+
 export interface IPost {
   id: number;
-  user_id: number;
-  category_id: number;
   title: string;
   short_content: string;
-  content: string;
   public_photo: string;
   created_at: string;
-  updated_at: string;
-  category: ICategory
+  category_name: string;
 }
 
-export interface IPostDetail extends IPost {
-  tags: ITag[],
+interface IPostDetail extends Omit<IPost, 'category_name'> {
+  user_id: number;
+  category_id: number;
+  content: string;
+  updated_at: string;
+  category: ICategory;
+  tags: ITag[];
   user: IUser
 }
 
@@ -28,19 +30,27 @@ export interface IPostDTO {
 
 
 export interface PaginatedPost {
-  current_page: number;
-  data: IPost[];  
-  first_page_url: string;
-  from: number;
-  last_page: number;
-  last_page_url: string;
-  links: [];
-  next_page_url: string;
-  path: string;
-  per_page: number;
-  prev_page_url: string | null
-  to: number;
-  total: number;
+  data: IPost[];
+  links: {
+    first: string | null;
+    last: string | null;
+    prev: string | null;
+    next: string | null
+  }
+  meta: {
+    current_page: number;
+    from: number;
+    last_page: number;
+    links: {
+      url: string | null;
+      label: string | null;
+      active: boolean;
+    }[];
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+  }
 }
 
 export interface IPostState {

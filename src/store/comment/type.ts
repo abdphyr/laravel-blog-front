@@ -2,8 +2,6 @@ import { IUser } from "../auth";
 
 export interface IComment {
   id: number;
-  user_id: number;
-  post_id: number;
   body: string;
   created_at: string;
   user: IUser
