@@ -84,9 +84,16 @@
                 to="/contact">Contact</router-link>
             </div>
             <div class="d-flex justify-content-between align-items-center">
-              <router-link v-if="user && notifCount > 0" to="/notifications" class="mr-3 btn-sm btn btn-success">
-                {{ notifCount }}
+              <router-link v-if="user && notifCount > 0" to="/notifications" class="m btn-success">
+                <notif-icon></notif-icon>
               </router-link>
+              <!-- <button type="button" class=" btn btn-primary position-relative">
+                <notif-icon></notif-icon>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  99+
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </button> -->
               <router-link @click="handleOpenAuthPage" v-if="!user" to="/login"
                 class="btn btn-primary mr-3 d-none d-lg-block">
                 Login
@@ -120,6 +127,7 @@
 </template>
 
 <script lang="ts" setup>
+import NotifIcon from './NotifIcon.vue';
 import { ref, computed, onMounted } from 'vue';
 import { useStore, authActionsCons, authpagesMutCons, notifActionsCons } from '@/store';
 import { useLink } from 'vue-router';

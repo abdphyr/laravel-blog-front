@@ -9,7 +9,7 @@ import HeaDer from "./layouts/HeaDer.vue";
 import FooTer from "./layouts/FooTer.vue";
 import { computed, onMounted } from "vue";
 import { useStore, authMutationCons, IAuth } from "./store";
-import "./style.css";
+import "./style.min.css";
 
 const store = useStore();
 const authpages = computed(() => store.state.authpages);

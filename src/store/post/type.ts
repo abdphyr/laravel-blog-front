@@ -7,7 +7,7 @@ export interface IPost {
   title: string;
   short_content: string;
   public_photo: string;
-  created_at: string;
+  created_at: Date;
   category_name: string;
 }
 
@@ -18,7 +18,7 @@ interface IPostDetail extends Omit<IPost, 'category_name'> {
   updated_at: string;
   category: ICategory;
   tags: ITag[];
-  user: IUser
+  user: IUser;
 }
 
 export interface IPostDTO {

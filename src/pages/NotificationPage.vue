@@ -1,19 +1,19 @@
 <template>
   <div class="container p-5">
-    <div class="d-flex justify-content-between px-3">
-      <h2>
+    <div class="d-flex flex-column flex-sm-row justify-content-between px-3">
+      <h2 class="text-center">
         Notifications
       </h2>
-      <div>
-        <button @click="handleNotifReadAll" class="btn btn-outline-primary rounded-1">
+      <div class="d-flex justify-content-between px-3 mb-3">
+        <button @click="handleNotifReadAll" class="btn btn-sm btn-outline-primary rounded-1">
           Read all
         </button>
-        <button @click="handleNotifDeleteAll" class="ms-5 btn btn-outline-danger rounded-1">
+        <button @click="handleNotifDeleteAll" class="ms-2 btn btn-sm btn-outline-danger rounded-1">
           Delete all
         </button>
       </div>
     </div>
-    <div v-for="notif in notifs" :key="notif.id" class="d-flex justify-content-between border rounded-2 p-4 m-3">
+    <div v-for="notif in notifs" :key="notif.id" class="d-flex justify-content-between border rounded-2 p-1 p-sm-4 m-0 m-sm-3 mb-3">
       <div>
         <div class="mb-2">
           {{ notif.created_at }}
