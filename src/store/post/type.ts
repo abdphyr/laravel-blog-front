@@ -7,8 +7,10 @@ export interface IPost {
   title: string;
   short_content: string;
   public_photo: string;
-  created_at: Date;
+  created_at: string;
+  content: string;
   category_name: string;
+  tags: ITag[];
 }
 
 interface IPostDetail extends Omit<IPost, 'category_name'> {

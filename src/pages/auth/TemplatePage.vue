@@ -97,7 +97,7 @@ const store = useStore();
 const { isRegister } = defineProps<{ isRegister: boolean }>();
 const error = computed(() => store.state.auth.error);
 const link = useLink({
-  to: "/"
+  to: "/blog"
 })
 
 const auth = ref({

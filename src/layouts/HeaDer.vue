@@ -14,7 +14,7 @@
             justify-content-center
           ">
           <h1 class="m-0 display-3 text-primary">
-            <router-link @click="(tab = 0)" to="/blog">
+            <router-link @click="(tab = 4)" to="/blog">
               Blog
             </router-link>
           </h1>
@@ -32,11 +32,11 @@
                 px-3
               ">
               <i class="fa fa-envelope text-primary mr-2"></i>
-              <small>info@example.com</small>
+              <small>abdphyr@gmail.com</small>
             </div>
             <div class="h-100 d-inline-flex align-items-center py-2 px-2">
               <i class="fa fa-phone-alt text-primary mr-2"></i>
-              <small>+012 345 6789</small>
+              <small>+998 88 492 90 98</small>
             </div>
           </div>
           <div class="col-lg-5 text-right">
@@ -68,46 +68,36 @@
           </button>
           <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
-              <!-- {{ tab }} -->
-              <router-link @click="(tab = 0)" :class="`nav-item nav-link` + (tab === 0 ? ' active' : '')"
-                to="/">Home</router-link>
-              <router-link @click="(tab = 1)" :class="`nav-item nav-link` + (tab === 1 ? ' active' : '')"
-                to="/about">About</router-link>
-              <router-link @click="(tab = 2)" :class="`nav-item nav-link` + (tab === 2 ? ' active' : '')"
-                to="/service">Service</router-link>
-              <router-link @click="(tab = 3)" :class="`nav-item nav-link` + (tab === 3 ? ' active' : '')"
-                to="/portfolio">Portfolio</router-link>
               <router-link @click="(tab = 4)" :class="`nav-item nav-link` + (tab === 4 ? ' active' : '')"
                 to="/blog">Blog</router-link>
-
               <router-link @click="(tab = 5)" :class="`nav-item nav-link` + (tab === 5 ? ' active' : '')"
                 to="/contact">Contact</router-link>
             </div>
             <div class="d-flex justify-content-between align-items-center">
-              <router-link v-if="user && notifCount > 0" to="/notifications" class="m btn-success">
-                <notif-icon></notif-icon>
+              <router-link v-if="user && notifCount > 0" to="/notifications" class="btn p-2 m-0 btn-success mr-2">
+                <div class="position-relative">
+                  <span class="position-absolute bg-danger d-flex 
+                  justify-content-center align-items-center text-small"
+                    style="right:0;top: 0px; width: 14px;height: 14px; font-size: 10px; border-radius: 50%;">
+                    {{ notifCount }}
+                  </span>
+                  <notif-icon ></notif-icon>
+                </div>
               </router-link>
-              <!-- <button type="button" class=" btn btn-primary position-relative">
-                <notif-icon></notif-icon>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  99+
-                  <span class="visually-hidden">unread messages</span>
-                </span>
-              </button> -->
               <router-link @click="handleOpenAuthPage" v-if="!user" to="/login"
                 class="btn btn-primary mr-3 d-none d-lg-block">
                 Login
               </router-link>
               <div v-if="user" class="d-flex justify-content-between align-items-center">
                 <div :class="width > 991 ? 'dropleft' : 'dropbottom'">
-                  <a href="" class="dropdown-toggle text-black" data-toggle="dropdown">{{ user.username }}</a>
+                  <a href="" class="dropdown-toggle text-black mr-2" data-toggle="dropdown">{{ user.username }}</a>
                   <div class="dropdown-menu rounded-0 me-5">
                     <router-link to="/create/blog" @click="(tab = 10000)" class="dropdown-item">
                       Create blog post
                     </router-link>
                     <router-link @click="handleLogut" class="dropdown-item" to="/blog/1">
                       Log out
-                    </router-link>
+                    </router-link>  
                   </div>
                 </div>
                 <div class="ms-2">
@@ -133,7 +123,7 @@ import { useStore, authActionsCons, authpagesMutCons, notifActionsCons } from '@
 import { useLink } from 'vue-router';
 
 const link = useLink({
-  to: "/"
+  to: "/blog"
 })
 const store = useStore()
 const user = computed(() => store.state.auth.value?.user);

@@ -66,7 +66,7 @@
             </div>
 
             <div class="mb-5">
-              <h3 class="mb-4 section-title">{{ comments.count }} Comments</h3>
+              <h3 class="mb-4 section-title">{{ comments.count }} Comment{{ comments.count > 1 ? "s" : '' }}</h3>
               <div v-for="comment in comments.value" :key="comment.id" class="media mb-4">
                 <img v-if="!comment.user.avatar" src="../../img/user1.webp" alt="Image"
                   class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px" />
@@ -77,7 +77,7 @@
                     {{ comment.user.username }} <small><i>{{ comment.created_at }}</i></small>
                   </h6>
                   <p>
-                  <div class="" >
+                  <div class="">
                     {{ comment.body }}
                   </div>
                   </p>

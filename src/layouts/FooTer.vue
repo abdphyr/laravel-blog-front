@@ -4,7 +4,7 @@
     <div class="row pt-5">
       <div class="col-lg-3 col-md-6 mb-5">
         <a href="index.html" class="navbar-brand">
-          <h1 class="m-0 mt-n3 display-4 text-primary">Klean</h1>
+          <h1 class="m-0 mt-n3 display-4 text-primary">Blog</h1>
         </a>
         <p>
           Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem

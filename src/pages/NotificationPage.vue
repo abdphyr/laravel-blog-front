@@ -16,7 +16,7 @@
     <div v-for="notif in notifs" :key="notif.id" class="d-flex justify-content-between border rounded-2 p-1 p-sm-4 m-0 m-sm-3 mb-3">
       <div>
         <div class="mb-2">
-          {{ notif.created_at }}
+          {{ date(notif.created_at) }}
         </div>
         <div class="d-flex justify-content-between mb-2">
           <div class="font-weight-bold text-primary mb-2">
@@ -54,6 +54,9 @@ import { computed } from 'vue';
 const store = useStore()
 const notifs = computed(() => store.state.notifications.notifications);
 
+const date = (created: string) => {
+  return new Date(created).toLocaleDateString()
+}
 
 const handleNotifDeleteAll = () => {
   ax.delete(`/notifications/deleteall`)

@@ -41,59 +41,31 @@
         <div class="col-lg-7 mb-5 mb-lg-0">
           <div class="contact-form">
             <div id="success"></div>
-            <form name="sentMessage" id="contactForm" novalidate>
+            <form @submit.prevent="handleSubmitContact" id="contactForm" novalidate>
               <div class="form-row">
                 <div class="col-sm-6 control-group">
-                  <input
-                    type="text"
-                    class="form-control p-4"
-                    id="name"
-                    placeholder="Your Name"
-                    required
-                    data-validation-required-message="Please enter your name"
-                  />
+                  <input v-model="contact.name" type="text" class="form-control p-4" id="name" placeholder="Your Name"
+                    required data-validation-required-message="Please enter your name" />
                   <p class="help-block text-danger"></p>
                 </div>
                 <div class="col-sm-6 control-group">
-                  <input
-                    type="email"
-                    class="form-control p-4"
-                    id="email"
-                    placeholder="Your Email"
-                    required
-                    data-validation-required-message="Please enter your email"
-                  />
+                  <input v-model="contact.email" type="email" class="form-control p-4" id="email"
+                    placeholder="Your Email" required data-validation-required-message="Please enter your email" />
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
               <div class="control-group">
-                <input
-                  type="text"
-                  class="form-control p-4"
-                  id="subject"
-                  placeholder="Subject"
-                  required
-                  data-validation-required-message="Please enter a subject"
-                />
+                <input v-model="contact.subject" type="text" class="form-control p-4" id="subject" placeholder="Subject"
+                  required data-validation-required-message="Please enter a subject" />
                 <p class="help-block text-danger"></p>
               </div>
               <div class="control-group">
-                <textarea
-                  class="form-control p-4"
-                  rows="6"
-                  id="message"
-                  placeholder="Message"
-                  required
-                  data-validation-required-message="Please enter your message"
-                ></textarea>
+                <textarea v-model="contact.message" class="form-control p-4" rows="6" id="message" placeholder="Message"
+                  required data-validation-required-message="Please enter your message"></textarea>
                 <p class="help-block text-danger"></p>
               </div>
               <div>
-                <button
-                  class="btn btn-primary btn-block py-3 px-5"
-                  type="submit"
-                  id="sendMessageButton"
-                >
+                <button class="btn btn-primary btn-block py-3 px-5" type="submit" id="sendMessageButton">
                   Send Message
                 </button>
               </div>
@@ -102,14 +74,9 @@
         </div>
         <div class="col-lg-5" style="min-height: 400px">
           <div class="position-relative h-100 rounded overflow-hidden">
-            <iframe
-              style="width: 100%; height: 100%; object-fit: cover; border: 0"
+            <iframe style="width: 100%; height: 100%; object-fit: cover; border: 0"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-              frameborder="0"
-              allowfullscreen
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
+              frameborder="0" allowfullscreen aria-hidden="false" tabindex="0"></iframe>
           </div>
         </div>
       </div>
@@ -119,4 +86,24 @@
 </template>
 
 <script lang="ts" setup>
+import { ax } from '@/store';
+import { reactive } from 'vue';
+
+const contact = reactive({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+})
+
+const handleSubmitContact = () => {
+  ax.post('/messages', contact)
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      alert(err.message)
+    })
+}
+
 </script>
